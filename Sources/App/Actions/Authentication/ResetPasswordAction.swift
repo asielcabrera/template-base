@@ -13,7 +13,7 @@ struct ResetPasswordAction: Action {
     typealias Output = HTTPStatus
     
     func execute(req: Request, input: Input) async throws -> Output {
-        guard let user = try await req.users.find(email: input.email) else {
+        guard let _ = try await req.users.find(email: input.email) else {
             return .noContent
         }
         

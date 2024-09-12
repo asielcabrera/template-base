@@ -6,7 +6,7 @@
 //
 import Vapor
 
-struct UserController: RouteCollection {
+struct AuthController: RouteCollection {
     
     func boot(routes: RoutesBuilder) throws {
         routes.group("auth") { auth in
@@ -14,28 +14,27 @@ struct UserController: RouteCollection {
             auth.post("login", use: login)
             
             auth.group("reset-password") { resetPasswordRoutes in
-//                resetPasswordRoutes.post("", use: resetPassword)
-//                resetPasswordRoutes.get("verify", use: verifyResetPasswordToken)
-//            }
-//            auth.post("recover", use: recoverAccount)
-//            
+                resetPasswordRoutes.post("", use: resetPassword)
+                resetPasswordRoutes.get("verify", use: verifyResetPasswordToken)
+            }
+            auth.post("recover", use: recoverAccount)
+            
             auth.post("accessToken", use: refreshAccessToken)
             
-                // Authentication required
-                auth.group(UserAuthenticator()) { authenticated in
-                    authenticated.get("me", use: getCurrentUser)
-                }
+            // Authentication required
+            auth.group(UserAuthenticator()) { authenticated in
+                authenticated.get("me", use: getCurrentUser)
             }
         }
     }
-
+    
     @Sendable
     private func register(_ req: Request) async throws -> HTTPStatus {
         try Register.Request.validate(content: req)
         let input = try req.content.decode(CreateUserAction.Input.self)
         let createUserAction = req.application.actions.make(CreateUserAction.self)
         _ = try await req.application.actionService.execute(req, createUserAction, input: input)
-
+        
         return .created
     }
     
