@@ -36,16 +36,14 @@ public func configure(_ app: Application) async throws {
     app.migrations.add(CreatePasswordToken())
     
     // MARK: Queues Configuration
-    //    try app.queues.use(.redis(url: "redis://localhost:6379"))
+        try app.queues.use(.redis(url: "redis://localhost:6379"))
     
     // MARK: Jobs
-    //    app.queues.add(EmailJob())
+        app.queues.add(EmailJob())
     
     // MARK: Services
         app.randomGenerators.use(.random)
-    //    app.repositories.use(.database)
-    //
-    
+
     // register routes
     try routes(app)
     
@@ -55,7 +53,7 @@ public func configure(_ app: Application) async throws {
     } else {
         app.jwt.signers.use(.hs256(key: "supersecretkey"))
         try await app.autoMigrate()
-        //        try app.queues.startInProcessJobs(on: .default)
+        try app.queues.startInProcessJobs(on: .default)
     }
     app.actions.use { app in
         CreateUserAction()
@@ -64,7 +62,6 @@ public func configure(_ app: Application) async throws {
     app.actions.use { app in
         LoginUserAction()
     }
-    
 }
 
 
