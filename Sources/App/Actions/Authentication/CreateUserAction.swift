@@ -27,7 +27,7 @@ struct CreateUserAction: Action {
             _ = try await req.users.create(user)
             
             // TODO: define emailVerifier
-            //            try await req.emailVerifier.veirify(for: user)
+            try await req.emailVerifier.verify(for: user)
             return .created
         }
         
@@ -39,3 +39,6 @@ struct CreateUserAction: Action {
         
     }
 }
+
+
+

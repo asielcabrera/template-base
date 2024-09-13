@@ -1,5 +1,5 @@
 {
-  "originHash" : "181f3a78711b9be74311eb3a0bcba00af63a6e9a95c39fde4c6f751262f084c7",
+  "originHash" : "01301f02b54f8304a3a663bb5f5175f49de03a5c545b1977197eb35f9210f5f5",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -152,6 +152,15 @@
       "state" : {
         "revision" : "622ce440f90d79b58e45f3a3efdd64c51d1dfd17",
         "version" : "1.6.2"
+      }
+    },
+    {
+      "identity" : "resend",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/asielcabrera/Resend.git",
+      "state" : {
+        "revision" : "841552a1bf275a709f12dcff6d860aff03283d63",
+        "version" : "0.0.4"
       }
     },
     {

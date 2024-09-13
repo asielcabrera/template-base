@@ -20,6 +20,7 @@ let package = Package(
         // authentication
         .package(url: "https://github.com/vapor/jwt.git", from: "4.0.0"),
         .package(url: "https://github.com/vapor/queues-redis-driver.git", from: "1.0.0"),
+        .package(url: "https://github.com/asielcabrera/Resend.git", from: "0.0.1")
     ],
     targets: [
         .executableTarget(
@@ -33,6 +34,7 @@ let package = Package(
                 .product(name: "NIOPosix", package: "swift-nio"),
                 .product(name: "JWT", package: "jwt"),
                 .product(name: "QueuesRedisDriver", package: "queues-redis-driver"),
+                .product(name: "Resend", package: "Resend")
             ],
             swiftSettings: swiftSettings
         ),

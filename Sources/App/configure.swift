@@ -5,6 +5,7 @@ import Vapor
 import JWT
 import QueuesRedisDriver
 import Leaf
+import Resend
 
 // configures your application
 public func configure(_ app: Application) async throws {
@@ -23,8 +24,8 @@ public func configure(_ app: Application) async throws {
         tls: .prefer(try .init(configuration: .clientDefault)))
     ), as: .psql)
     
-    
-    
+    // TODO: - RESEND = re_PnB2CCPU_JonqirmcX5uzbVRNrPWojAQ6
+    app.resend.initialize()
     app.views.use(.leaf)
     
     //    app.config = .environment
