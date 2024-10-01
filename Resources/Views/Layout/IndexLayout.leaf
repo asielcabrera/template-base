@@ -1,0 +1,6 @@
+#extend("Layout/Base"):
+    #export("navigation"):
+        #extend("Components/Navbar")
+    #endexport
+#endextend
+    

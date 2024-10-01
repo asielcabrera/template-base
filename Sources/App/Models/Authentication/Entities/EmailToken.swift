@@ -43,6 +43,9 @@ final class EmailToken: Model, @unchecked Sendable {
 
 extension EmailToken: Entity {
     struct Public: Content {
-        
+        let id: UUID?
+        let user: User.Public
+        let token: String
+        let expiresAt: Date
     }
 }

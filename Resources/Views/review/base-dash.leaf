@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#(title)</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Dashboard layout -->
+    <div class="flex h-screen">
+
+        <!-- Sidebar -->
+        <aside class="bg-gray-800 text-white w-64 p-4">
+            <h2 class="text-xl font-semibold mb-6">Menu</h2>
+            <ul>
+                <li class="mb-4"><a href="/views/dashboard" class="hover:underline">Dashboard</a></li>
+                <li class="mb-4"><a href="/views/manage-users" class="hover:underline">Manage Users</a></li>
+                <li class="mb-4"><a href="/views/manage-patients" class="hover:underline">Manage Patients</a></li>
+                <li class="mb-4"><a href="/views/manage-trips" class="hover:underline">Manage Trips</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main content area -->
+        <div class="flex-1 flex flex-col">
+            
+            <!-- Header -->
+            <header class="bg-white p-4 shadow-md flex justify-between items-center">
+                <h1 class="text-2xl font-semibold">Sistema de Gestión</h1>
+                <form action="/views/logout" method="post">
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+                </form>
+            </header>
+
+            <!-- Main content -->
+            <main class="p-6 flex-1">
+                #import("content")
+            </main>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

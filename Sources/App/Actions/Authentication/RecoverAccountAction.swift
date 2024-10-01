@@ -9,10 +9,8 @@ import Vapor
 import Fluent
 
 struct RecoverAccountAction: Action {
-    typealias Input = Recovery.AccountRequest
-    typealias Output = HTTPStatus
-    
-    func execute(req: Request, input: Input) async throws -> Output {
+
+    func execute(req: Request, input: Recovery.AccountRequest) async throws -> HTTPStatus {
         guard input.password == input.confirmPassword else {
             throw AuthenticationError.passwordsDontMatch
         }

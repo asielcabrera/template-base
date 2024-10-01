@@ -10,11 +10,7 @@ import Fluent
 
 struct GetCurrentUserAction: Action {
     
-    typealias Input = Payload
-    typealias Output = User.Public
-    
-    
-    func execute(req: Request, input: Input) async throws -> Output {
+    func execute(req: Request, input: AuthPayload) async throws -> User.Public {
 
         guard let user = try await req.users.find(id: input.userID) else {
             throw AuthenticationError.userNotFound

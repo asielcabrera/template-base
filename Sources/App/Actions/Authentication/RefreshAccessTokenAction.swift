@@ -10,11 +10,7 @@ import Fluent
 
 struct RefreshAccessTokenAction: Action {
     
-    typealias Input = AccessToken.Request
-    
-    typealias Output = AccessToken.Response
-    
-    func execute(req: Request, input: Input) async throws -> Output {
+    func execute(req: Request, input: AccessToken.Request) async throws -> AccessToken.Response {
         
         let hashedRefreshToken = SHA256.hash(input.refreshToken)
         
@@ -31,7 +27,7 @@ struct RefreshAccessTokenAction: Action {
         let hashedToken = SHA256.hash  (token)
         
         let newRefreshToken = try RefreshToken(token: hashedToken, userID: user.requireID())
-        let payload = try Payload(with: user)
+        let payload = try AuthPayload(with: user)
         let accessToken = try req.jwt.sign(payload)
         
         

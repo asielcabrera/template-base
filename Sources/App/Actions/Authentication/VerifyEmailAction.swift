@@ -9,10 +9,8 @@ import Vapor
 import Fluent
 
 struct VerifyEmailAction: Action {
-    typealias Input = String
-    typealias Output = HTTPStatus
-    
-    func execute(req: Request, input: Input) async throws -> Output {
+
+    func execute(req: Request, input: String) async throws -> HTTPStatus {
         let hashedToken = SHA256.hash(input)
         
         guard let emailToken = try await req.emailTokens.find(token: hashedToken) else { throw AuthenticationError.emailTokenNotFound }

@@ -17,10 +17,8 @@ protocol Repository {
     
     func findAll() async throws -> [Element]
     func find(id: UUID) async throws -> Element?
-    func create(_ model: Element) async throws -> Element
-    func update(_ model: Element.Public) async throws
+    func create(_ model: Element) async throws
     func delete(id: UUID) async throws
-    
     func set<Field>(_ field: KeyPath<Element, Field>, to value: Field.Value, for userID: UUID) async throws  where Field: QueryableProperty, Field.Model == Element
     func count() async throws -> Int
 }

@@ -1,0 +1,30 @@
+#extend("base"):
+    #export("content"):
+        <h1 class="text-2xl font-bold mb-4">Manejar Usuarios</h1>
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr>
+                    <th class="py-2 px-3 bg-gray-200">Nombre</th>
+                    <th class="py-2 px-3 bg-gray-200">Correo</th>
+                    <th class="py-2 px-3 bg-gray-200">Role</th>
+                    <th class="py-2 px-3 bg-gray-200">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Lista de usuarios generada dinámicamente -->
+                #for(user in users):
+                <tr>
+                    <td class="border px-3 py-2">#(user.fullName)</td>
+                    <td class="border px-3 py-2">#(user.email)</td>
+                    <td class="border px-3 py-2">#(user.role)</td>
+                    <td class="border px-3 py-2">
+                        <a href="/views/edit-user/#(user.id)" class="text-blue-500">Editar</a> |
+                        <a href="/views/delete-user/#(user.id)" class="text-red-500">Eliminar</a>
+                    </td>
+                </tr>
+                #endfor
+            </tbody>
+        </table>
+    #endexport
+#endextend
+

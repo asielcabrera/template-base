@@ -9,12 +9,10 @@ import Vapor
 import Fluent
 
 struct LoginUserAction: Action {
-    typealias Input = Login.Request
-    typealias Output = Login.Response
     
-    func execute(req: Request, input: Input) async throws -> Output {
+    func execute(req: Request, input: Login.Request) async throws -> Login.Response {
         guard let user = try await req.users.find(email: input.email) else { throw AuthenticationError.invalidEmailOrPassword }
-//        guard user.isEmailVerified else { throw AuthenticationError.emailIsNotVerified }
+        guard user.isEmailVerified else { throw AuthenticationError.emailIsNotVerified }
         
         let passwordMatches = try await req.password.async.verify(input.password, created: user.passwordHash)
         guard passwordMatches else { throw AuthenticationError.invalidEmailOrPassword }
@@ -24,9 +22,11 @@ struct LoginUserAction: Action {
         let token = req.random.generate(bits: 256)
         let refreshToken = try RefreshToken(token: SHA256.hash(token), userID: user.requireID())
         
-        _ = try await req.refreshTokens.create(refreshToken)
+        try await req.refreshTokens.create(refreshToken)
         
-        let accessToken = try req.jwt.sign(Payload(with: user))
+        let accessToken = try req.jwt.sign(AuthPayload(with: user))
+        // Store the token in the session
+        req.session.data["sessionToken"] = accessToken
         
         return Login.Response(user: user.toPublic(), accessToken: accessToken, refreshToken: token)
     }

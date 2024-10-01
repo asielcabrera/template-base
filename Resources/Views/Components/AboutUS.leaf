@@ -1,0 +1,35 @@
+<!-- About us-->
+
+<section class="bg-white dark:bg-gray-900">
+    <div class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+        <img class="w-full dark:hidden" src="https://img1.wsimg.com/isteam/ip/7d611f15-d82a-43b2-9960-aa8b1e5a36b3/3.jpg" alt="dashboard image">
+        <img class="w-full hidden dark:block" src="https://img1.wsimg.com/isteam/ip/7d611f15-d82a-43b2-9960-aa8b1e5a36b3/3.jpg" alt="dashboard image">
+        <div class="mt-4 md:mt-0">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Group Therapy.</h2>
+            <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
+            Each of our patients are eligible for this personalized service. Schedule yours today, and we promise you’ll leave our clinic well-informed and confident that your health is in the best of hands.</p>
+        </div>
+    </div>
+    
+    <div class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+        
+        <div class="mt-4 md:mt-0">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Individual Therapy.</h2>
+            <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
+            Each of our patients are eligible for this personalized service. Schedule yours today, and we promise you’ll leave our clinic well-informed and confident that your health is in the best of hands.</p>
+        </div>
+        
+        <img class="w-full dark:hidden" src="https://img1.wsimg.com/isteam/ip/7d611f15-d82a-43b2-9960-aa8b1e5a36b3/8.jpg" alt="dashboard image">
+        <img class="w-full hidden dark:block" src="https://img1.wsimg.com/isteam/ip/7d611f15-d82a-43b2-9960-aa8b1e5a36b3/8.jpg" alt="dashboard image">
+    </div>
+    
+    <div class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+        <img class="w-full dark:hidden" src="https://img1.wsimg.com/isteam/ip/7d611f15-d82a-43b2-9960-aa8b1e5a36b3/9.jpg" alt="dashboard image">
+        <img class="w-full hidden dark:block" src="https://img1.wsimg.com/isteam/ip/7d611f15-d82a-43b2-9960-aa8b1e5a36b3/9.jpg" alt="dashboard image">
+        <div class="mt-4 md:mt-0">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Our Team.</h2>
+            <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
+            Our professional team is here to guide our patients and their families every step of the way throughout their health journeys. At Community Connection Florida, we not only treat our patience with kindness and care, we also treat them as Family. </p>
+        </div>
+    </div>
+</section>

@@ -1,5 +1,5 @@
 {
-  "originHash" : "01301f02b54f8304a3a663bb5f5175f49de03a5c545b1977197eb35f9210f5f5",
+  "originHash" : "c6d61b10ddfd45a13adb37346d3a086274f183e9ac93e85bf1a2ab135a7d5503",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -123,8 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/queues.git",
       "state" : {
-        "revision" : "be4ac720794a0cf931faa5a70224265b3d4820f0",
-        "version" : "1.16.0"
+        "revision" : "2d38cd224be1152caaeacc6f63c8216566a67186",
+        "version" : "1.16.1"
       }
     },
     {
@@ -222,8 +222,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-crypto.git",
       "state" : {
-        "revision" : "9f95b4d033a4edd3814b48608db3f2ca90c7218b",
-        "version" : "3.7.0"
+        "revision" : "81bee98e706aee68d39ed5996db069ef2b313d62",
+        "version" : "3.7.1"
       }
     },
     {

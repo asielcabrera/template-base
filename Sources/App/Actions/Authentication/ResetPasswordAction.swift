@@ -9,15 +9,13 @@ import Vapor
 import Fluent
 
 struct ResetPasswordAction: Action {
-    typealias Input = Recovery.ResetPasswordRequest
-    typealias Output = HTTPStatus
-    
-    func execute(req: Request, input: Input) async throws -> Output {
-        guard let _ = try await req.users.find(email: input.email) else {
+
+    func execute(req: Request, input: Recovery.ResetPasswordRequest) async throws -> HTTPStatus {
+        guard let user = try await req.users.find(email: input.email) else {
             return .noContent
         }
         
-//        try await req.passwordResetter.reset(for: user)
+        try await req.passwordResetter.reset(for: user)
         
         return .ok
     }

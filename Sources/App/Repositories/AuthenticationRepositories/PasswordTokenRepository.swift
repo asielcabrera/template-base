@@ -25,8 +25,8 @@ struct PasswordTokenRepository: PasswordTokenRepositoryProtocol {
         nil
     }
     
-    func create(_ model: PasswordToken) async throws -> PasswordToken {
-        PasswordToken()
+    func create(_ model: PasswordToken) async throws {
+        
     }
     
     func update(_ model: PasswordToken.Public) async throws {

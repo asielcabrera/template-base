@@ -20,7 +20,7 @@ struct AuthController: RouteCollection {
             auth.post("recover", use: recoverAccount)
             
             auth.post("accessToken", use: refreshAccessToken)
-            
+            auth.post("email-verification", use: verifyEmail)
             // Authentication required
             auth.group(UserAuthenticator()) { authenticated in
                 authenticated.get("me", use: getCurrentUser)
@@ -32,35 +32,30 @@ struct AuthController: RouteCollection {
     private func register(_ req: Request) async throws -> HTTPStatus {
         try Register.Request.validate(content: req)
         let input = try req.content.decode(CreateUserAction.Input.self)
-        let createUserAction = req.application.actions.make(CreateUserAction.self)
-        _ = try await req.application.actionService.execute(req, createUserAction, input: input)
+        let output = try await req.actions.createUserAction.execute(req: req, input: input)
         
-        return .created
+        return output
     }
     
     @Sendable
     private func login(_ req: Request) async throws -> Login.Response {
         try Login.Request.validate(content: req)
         let input = try req.content.decode(Login.Request.self)
-        let loginUserAction = req.application.actions.make(LoginUserAction.self)
-        let output = try await req.application.actionService.execute(req, loginUserAction, input: input)
-        
+        let output = try await req.actions.loginUserAction.execute(req: req, input: input)
         return output
     }
     
     @Sendable
     private func refreshAccessToken(_ req: Request) async throws -> AccessToken.Response {
         let input = try req.content.decode(AccessToken.Request.self)
-        let refreshTokens = req.application.actions.make(RefreshAccessTokenAction.self)
-        let output = try await req.application.actionService.execute(req, refreshTokens, input: input)
+        let output = try await req.actions.refreshAccessTokenAction.execute(req: req, input: input)
         return  output
     }
     
     @Sendable
     private func getCurrentUser(_ req: Request) async throws -> User.Public {
-        let input = try req.auth.require(Payload.self)
-        let getCurrentUser = req.application.actions.make(GetCurrentUserAction.self)
-        let output = try await req.application.actionService.execute(req, getCurrentUser, input: input)
+        let input = try req.auth.require(AuthPayload.self)
+        let output = try await req.actions.getCurrentUserAction.execute(req: req, input: input)
         return  output
         
     }
@@ -68,16 +63,14 @@ struct AuthController: RouteCollection {
     @Sendable
     private func verifyEmail(_ req: Request) async throws -> HTTPStatus {
         let input = try req.query.get(String.self, at: "token")
-        let verifyEmail = req.application.actions.make(VerifyEmailAction.self)
-        let output = try await req.application.actionService.execute(req, verifyEmail, input: input)
-        return  output
+        let output = try await req.actions.verifyEmailAction.execute(req: req, input: input)
+        return output
     }
     
     @Sendable
     private func resetPassword(_ req: Request) async throws -> HTTPStatus {
         let input =  try req.content.decode(Recovery.ResetPasswordRequest.self)
-        let resetPassword = req.application.actions.make(ResetPasswordAction.self)
-        let output = try await req.application.actionService.execute(req, resetPassword, input: input)
+        let output = try await req.actions.resetPasswordAction.execute(req: req, input: input)
         return  output
     }
     
@@ -86,7 +79,7 @@ struct AuthController: RouteCollection {
         let input = try req.query.get(String.self, at: "token")
         let verifyResetPasswordToken = req.application.actions.make(VerifyResetPasswordTokenAction.self)
         let output = try await req.application.actionService.execute(req, verifyResetPasswordToken, input: input)
-        return  output
+        return output
     }
     
     @Sendable

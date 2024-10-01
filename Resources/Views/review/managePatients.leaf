@@ -1,0 +1,7 @@
+#extend("base"):
+    #export("content"):
+        <h1 class="text-2xl font-bold mb-4">Manejar Pacientes</h1>
+        <!-- Código similar al manejo de usuarios, pero con datos de pacientes -->
+    #endexport
+#endextend
+

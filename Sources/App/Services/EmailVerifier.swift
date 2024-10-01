@@ -11,7 +11,7 @@ import Queues
 struct EmailVerifier {
     
     let emailTokenRepository: EmailTokenRepository
-//    let config: AppConfig
+    let config: AppConfig
     let queue: Queue
     let eventLoop: EventLoop
     let generator: RandomGenerator
@@ -22,7 +22,7 @@ struct EmailVerifier {
             let emailToken = try EmailToken(userID: user.requireID(), token: SHA256.hash(token))
             let verifyUrl = url(token: token)
             
-            _ = try await emailTokenRepository.create(emailToken)
+            try await emailTokenRepository.create(emailToken)
             
             var verificationEmail = VerificationEmail(verifyUrl: verifyUrl)
             verificationEmail.append(key: "username", value: user.fullName)
@@ -37,14 +37,13 @@ struct EmailVerifier {
     }
     
     private func url(token: String) -> String {
-//        #"\#(config.apiURL)/auth/email-verification?token=\#(token)"#
-        #"https://localhost:8080/auth/email-verification?token=\#(token)"#
+        #"\#(config.apiURL)/auth/email-verification?token=\#(token)"#
     }
 }
 
 
 extension Request {
     var emailVerifier: EmailVerifier {
-        .init(emailTokenRepository: self.emailTokens, queue: self.queue, eventLoop: eventLoop, generator: self.application.random)
+        .init(emailTokenRepository: self.emailTokens, config: self.application.config, queue: self.queue, eventLoop: eventLoop, generator: self.application.random)
     }
 }

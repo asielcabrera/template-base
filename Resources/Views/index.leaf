@@ -1,12 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-
-  <title>#(title)</title>
-</head>
-
-<body>
-  <h1>#(title)</h1>
-</body>
-</html>
+<!-- index.leaf -->
+#extend("Layout/IndexLayout"):
+    #export("title"):
+        Bienvenido a la Plataforma
+    #endexport
+    #export("content"):
+        #extend("Components/Header")
+        #extend("Components/AboutUS")
+        #extend("Components/Faqs")
+        #extend("Components/ContactUS")
+    #endexport
+    #export("footer"):
+        #extend("Components/Footer")
+    #endexport
+#endextend

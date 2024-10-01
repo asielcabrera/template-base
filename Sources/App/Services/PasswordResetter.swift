@@ -19,12 +19,12 @@ struct PasswordResetter {
     func reset(for user: User) async throws {
         do {
             let token = generator.generate(bits: 256)
-//            let resetPasswordToken = try PasswordToken(userID: user.requireID(), token: SHA256.hash(token))
-//            let url = resetURL(for: token)
-//            let email = ResetPasswordEmail(resetURL: url)
-//            
-//            try await repository.create(resetPasswordToken)
-//            try await queue.dispatch(EmailJob.self, .init(email, to: user.email))
+            let resetPasswordToken = try PasswordToken(userID: user.requireID(), token: SHA256.hash(token))
+            let url = resetURL(for: token)
+            let email = ResetPasswordEmail(resetURL: url)
+            
+            _ = try await repository.create(resetPasswordToken)
+            try await queue.dispatch(EmailJob.self, .init(email, to: user.email))
     
         } catch {
             throw error

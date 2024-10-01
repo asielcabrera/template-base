@@ -26,10 +26,8 @@ struct UserRepository: UserRepositoryProtocol {
         return try await User.query(on: database).filter(\.$email, .equal, email).first()
     }
     
-    func create(_ model: User) async throws -> User {
+    func create(_ model: User) async throws {
         try await model.save(on: database)
-        
-        return model
     }
     
     func update(_ model: User.Public) async throws {
@@ -49,10 +47,13 @@ struct UserRepository: UserRepositoryProtocol {
     }
     
     func set<Field>(_ field: KeyPath<User, Field>, to value: Field.Value, for userID: UUID) async throws where Field : QueryableProperty, User == Field.Model {
-        
+        try await User.query(on: database)
+            .filter(\.$id == userID)
+            .set(field, to: value)
+            .update()
     }
     
     func count() async throws -> Int {
-        0
+        try await User.query(on: self.database).count()
     }
 }

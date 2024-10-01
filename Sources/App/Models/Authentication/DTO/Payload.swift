@@ -8,7 +8,7 @@
 import Vapor
 import JWT
 
-struct Payload: JWTPayload, Authenticatable, @unchecked Sendable {
+struct AuthPayload: JWTPayload, Authenticatable, @unchecked Sendable {
     // User-releated stuff
     var userID: UUID
     var fullName: String
@@ -32,7 +32,7 @@ struct Payload: JWTPayload, Authenticatable, @unchecked Sendable {
 }
 
 extension User {
-    convenience init(from payload: Payload) {
+    convenience init(from payload: AuthPayload) {
         self.init(id: payload.userID, fullName: payload.fullName, email: payload.email, passwordHash: "", role: payload.role)
     }
 }

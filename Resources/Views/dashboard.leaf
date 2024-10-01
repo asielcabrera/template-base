@@ -1,0 +1,14 @@
+<!-- Dashboard.leaf -->
+#extend("Layout/DashboardLayout"):
+    #export("content"):
+
+        
+      </div>
+    #endexport
+    #export("scripts"):
+      <script>
+          const token = localStorage.getItem('sessionToken');
+          console.log(token);
+        </script>
+    #endexport
+#endextend

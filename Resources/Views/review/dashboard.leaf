@@ -1,0 +1,23 @@
+<!-- dashboard.leaf -->
+#extend("base"):
+    #export("title"): Dashboard #endexport
+    #export("content"):
+        <div class="grid grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-2">Usuarios</h3>
+                <p>Administra tus usuarios desde aquí.</p>
+                <a href="/users" class="text-blue-500 hover:underline">Ver más</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-2">Pacientes</h3>
+                <p>Gestiona la información de los pacientes.</p>
+                <a href="/patients" class="text-blue-500 hover:underline">Ver más</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-2">Viajes</h3>
+                <p>Organiza tus rutas de viajes.</p>
+                <a href="/trips" class="text-blue-500 hover:underline">Ver más</a>
+            </div>
+        </div>
+    #endexport
+#endextend

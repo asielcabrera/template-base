@@ -9,10 +9,8 @@ import Vapor
 import Fluent
 
 struct VerifyResetPasswordTokenAction: Action {
-    typealias Input = String
-    typealias Output = HTTPStatus
-    
-    func execute(req: Request, input: Input) async throws -> Output {
+
+    func execute(req: Request, input: String) async throws -> HTTPStatus {
         let hashedToken = SHA256.hash(input)
         
         guard let passwordToken = try await req.passwordTokens.find(token: hashedToken) else { throw AuthenticationError.invalidPasswordToken }

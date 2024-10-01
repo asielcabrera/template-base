@@ -10,11 +10,7 @@ import Fluent
 
 struct CreateUserAction: Action {
     
-    typealias Input = Register.Request
-    
-    typealias Output = HTTPStatus
-    
-    func execute(req: Request, input: Input) async throws -> Output {
+    func execute(req: Request, input: Register.Request) async throws -> HTTPStatus {
         
         guard input.password == input.confirmPassword else {
             throw AuthenticationError.passwordsDontMatch
@@ -24,9 +20,8 @@ struct CreateUserAction: Action {
         let user = try User(from: input, hash: passHash)
         
         do {
-            _ = try await req.users.create(user)
+            try await req.users.create(user)
             
-            // TODO: define emailVerifier
             try await req.emailVerifier.verify(for: user)
             return .created
         }

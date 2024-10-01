@@ -13,13 +13,16 @@ public protocol RandomGenerator: Sendable {
 }
 
 extension Application {
-    public struct RandomGenerators {
+    public final class RandomGenerators: Sendable {
         public struct Provider {
             let run: ((Application) -> Void)
         }
         
         public let app: Application
         
+        init(app: Application) {
+            self.app = app
+        }
         
         public func use(_ provider: Provider) {
             provider.run(app)
@@ -29,7 +32,7 @@ extension Application {
             storage.makeGenerator = makeGenerator
         }
         
-        final class Storage: Sendable {
+        final class Storage: @unchecked Sendable {
             var makeGenerator: ((Application) -> RandomGenerator)?
             init() {}
         }
